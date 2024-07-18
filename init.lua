@@ -591,6 +591,20 @@ require('lazy').setup({
             },
           },
         },
+
+        tsserver = {
+          commands = {
+            OrganizeImports = {
+              function()
+                vim.lsp.buf.execute_command {
+                  command = '_typescript.organizeImports',
+                  arguments = { vim.api.nvim_buf_get_name(0) },
+                }
+              end,
+              description = 'Organize imports',
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -635,6 +649,12 @@ require('lazy').setup({
         end,
         mode = '',
         desc = '[F]ormat buffer',
+      },
+      {
+        '<leader>oi',
+        vim.cmd.OrganizeImports,
+        mode = 'n',
+        desc = '[O]rganize [I]mports',
       },
     },
     opts = {
